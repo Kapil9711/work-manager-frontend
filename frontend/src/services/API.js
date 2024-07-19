@@ -12,10 +12,40 @@ class API {
     this.headers = headers;
   }
 
+  //login user -> /api/v1/register
+  async register(endPoint, bodyData) {
+    try {
+      const { data } = await this.api.post(endPoint, bodyData, this.headers);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
   //login user -> /api/v1/login
   async login(endPoint, bodyData) {
     const { data } = await this.api.post(endPoint, bodyData, this.headers);
     return data;
+  }
+
+  //login user -> /api/v1/password/forgot
+  async forgotPassword(endPoint, bodyData) {
+    try {
+      const { data } = await this.api.put(endPoint, bodyData, this.headers);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
+  //login user -> /api/v1/password/forgot
+  async resetPassword(endPoint, bodyData) {
+    try {
+      const { data } = await this.api.put(endPoint, bodyData, this.headers);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
   }
 
   //logout user -> /api/v1/logout
