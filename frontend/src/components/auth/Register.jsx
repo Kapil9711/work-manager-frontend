@@ -41,7 +41,7 @@ const Register = ({ setActive }) => {
       }}
       className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
-      <h2 className="text-3xl text-center underline text-white font-bold mb-4">
+      <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Register
       </h2>
       <Form
@@ -66,7 +66,7 @@ const Register = ({ setActive }) => {
         </div>
         <div className="box2 flex flex-col">
           <label
-            className="text-xl  font-bold tracking-wide text-gray-200 "
+            className="text-xl   font-bold tracking-wide text-gray-200 "
             htmlFor="name"
           >
             Username
@@ -81,7 +81,7 @@ const Register = ({ setActive }) => {
         </div>
         <div className="box3 flex flex-col">
           <label
-            className="text-xl  font-bold tracking-wide text-gray-200  "
+            className="text-xl font-bold tracking-wide text-gray-200  "
             htmlFor="password"
           >
             Password

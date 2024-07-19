@@ -33,7 +33,7 @@ const Login = ({ setActive }) => {
       }}
       className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
-      <h2 className="text-3xl text-center underline text-white font-bold mb-4">
+      <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Login
       </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
