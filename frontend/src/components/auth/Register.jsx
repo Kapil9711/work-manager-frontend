@@ -3,6 +3,8 @@ import API from "../../services/API";
 import styled from "styled-components";
 import Loading from "../../utilities/Loading";
 import Notify from "../../utilities/Toasts";
+import gsap, { Expo } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Form = styled.form``;
 
@@ -13,6 +15,16 @@ const Register = ({ setActive }) => {
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     emailRef.current.focus();
+  });
+
+  useGSAP(() => {
+    gsap.from(".register", {
+      duration: 1.2,
+      opacity: 0,
+      x: 500,
+      scale: 0.6,
+      ease: Expo.easeInOut,
+    });
   });
 
   const handleSubmit = async (e) => {
@@ -39,7 +51,7 @@ const Register = ({ setActive }) => {
         width: "min(95%,420px)",
         background: "hsl(20, 100%, 56%)",
       }}
-      className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
+      className="register border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Register

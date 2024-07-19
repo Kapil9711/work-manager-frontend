@@ -2,11 +2,23 @@ import { useRef, useState } from "react";
 import API from "../../services/API";
 import Loading from "../../utilities/Loading";
 import Notify from "../../utilities/Toasts";
+import gsap, { Expo } from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const ForgotPassword = ({ setActive, setResetToken }) => {
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
   const [isLoading, setLoading] = useState(false);
+
+  useGSAP(() => {
+    gsap.from(".forgotPassword", {
+      duration: 1.1,
+      opacity: 0,
+      scale: 0.6,
+      x: 500,
+      ease: Expo.easeInOut,
+    });
+  });
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -33,7 +45,7 @@ const ForgotPassword = ({ setActive, setResetToken }) => {
         width: "min(95%,420px)",
         background: "hsl(20, 100%, 56%)",
       }}
-      className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
+      className="forgotPassword border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         ForgotPassword

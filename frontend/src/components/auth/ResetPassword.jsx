@@ -2,11 +2,23 @@ import { useRef, useState } from "react";
 import API from "../../services/API";
 import Loading from "../../utilities/Loading";
 import Notify from "../../utilities/Toasts";
+import { useGSAP } from "@gsap/react";
+import gsap, { Expo } from "gsap";
 
 const ResetPassword = ({ setActive, resetToken }) => {
   const passwordRef1 = useRef(null);
   const passwordRef2 = useRef(null);
   const [isLoading, setLoading] = useState(false);
+
+  useGSAP(() => {
+    gsap.from(".resetPassword", {
+      duration: 1.2,
+      opacity: 0,
+      scale: 0.6,
+      x: 500,
+      ease: Expo.easeInOut,
+    });
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +48,7 @@ const ResetPassword = ({ setActive, resetToken }) => {
         width: "min(95%,420px)",
         background: "hsl(20, 100%, 56%)",
       }}
-      className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
+      className="resetPassword border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         ResetPassword

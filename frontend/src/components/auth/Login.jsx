@@ -2,11 +2,27 @@ import { useRef, useState } from "react";
 import Loading from "../../utilities/Loading";
 import API from "../../services/API";
 import Notify from "../../utilities/Toasts";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Expo } from "gsap";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ setActive }) => {
+const Login = ({ setActive, firstRender }) => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useGSAP(() => {
+    gsap.from(".login", {
+      delay: firstRender ? 1 : 0,
+      duration: 1,
+      opacity: 0,
+      scale: 0.6,
+      x: -500,
+      ease: Expo.easeInOut,
+    });
+  });
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -20,6 +36,7 @@ const Login = ({ setActive }) => {
     if (data.success) {
       Notify("success", data.message);
       setLoading(false);
+      navigate("/dashboard");
     } else {
       setLoading(false);
       Notify("error", data.message);
@@ -31,7 +48,7 @@ const Login = ({ setActive }) => {
         width: "min(95%,420px)",
         background: "hsl(20, 100%, 56%)",
       }}
-      className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
+      className="login border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Login
