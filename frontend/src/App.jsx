@@ -4,13 +4,17 @@
 import AuthPage from "./page/AuthPage";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./page/LandingPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />}></Route>
-      <Route path="/auth" element={<AuthPage />}></Route>
-    </Routes>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/auth" element={<AuthPage />}></Route>
+      </Routes>
+    </>
   );
 }
 
