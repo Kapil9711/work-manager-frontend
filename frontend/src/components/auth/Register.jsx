@@ -39,7 +39,7 @@ const Register = ({ setActive }) => {
         width: "min(95%,420px)",
         background: "hsl(20, 100%, 56%)",
       }}
-      className="border-2 py-8 px-5 bg-orange-500"
+      className="border-2 py-8 px-5 bg-orange-500 shadow-2xl"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-4">
         Register
@@ -49,9 +49,9 @@ const Register = ({ setActive }) => {
         onSubmit={handleSubmit}
         className="flex flex-col gap-5"
       >
-        <div className="box1 flex flex-col gap-2">
+        <div className="box1 flex flex-col ">
           <label
-            className="   text-xl  font-bold tracking-wide text-gray-200 "
+            className="text-xl  font-bold tracking-wide text-gray-200 "
             htmlFor="email"
           >
             Email

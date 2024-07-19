@@ -24,8 +24,12 @@ class API {
 
   //login user -> /api/v1/login
   async login(endPoint, bodyData) {
-    const { data } = await this.api.post(endPoint, bodyData, this.headers);
-    return data;
+    try {
+      const { data } = await this.api.post(endPoint, bodyData, this.headers);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
   }
 
   //login user -> /api/v1/password/forgot
