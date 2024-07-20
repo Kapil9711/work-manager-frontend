@@ -51,7 +51,7 @@ const Register = ({ setActive }) => {
         width: "min(95%,420px)",
         background: "hsl(20, 100%, 56%)",
       }}
-      className="register border-2 py-8 px-5 bg-orange-500 shadow-2xl"
+      className="register border-2 rounded-xl py-8 px-5 bg-orange-500 shadow-2xl"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Register
