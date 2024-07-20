@@ -1,14 +1,15 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import Header from "../components/landingPage/header/Header";
+import { useEffect, useState } from "react";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    setHeight(Number(window.innerHeight));
+  }, []);
+
   return (
-    <div className="bg-orange-200 min-h-screen flex flex-col justify-center items-center">
-      <h1>Landing page</h1>
-      <button className="bg-orange-600 p-2" onClick={() => navigate("/auth")}>
-        Lets Start
-      </button>
+    <div className="min-h-screen px-4 overflow-hidden sm:px-0  bg-black  text-white">
+      <Header height={height} />
     </div>
   );
 };

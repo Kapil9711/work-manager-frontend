@@ -16,7 +16,7 @@ const AuthPage = () => {
 
   useGSAP(() => {
     gsap.from(".auth", {
-      duration: 1.4,
+      duration: 1.6,
       // opacity: 0,
       scale: 0.5,
       y: 600,

@@ -15,7 +15,7 @@ const Login = ({ setActive, firstRender }) => {
 
   useGSAP(() => {
     gsap.from(".login", {
-      delay: firstRender ? 1.5 : 0.2,
+      delay: firstRender ? 1.6 : 0.2,
       duration: 1.3,
       opacity: 0,
       skewX: 30,
