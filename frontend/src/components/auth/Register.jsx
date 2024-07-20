@@ -19,11 +19,14 @@ const Register = ({ setActive }) => {
 
   useGSAP(() => {
     gsap.from(".register", {
-      duration: 1.2,
+      delay: 0.2,
+      duration: 1.3,
+      skewX: -30,
+      skewY: 20,
       opacity: 0,
       x: 500,
       scale: 0.6,
-      ease: Expo.easeInOut,
+      ease: Expo.easeOut,
     });
   });
 

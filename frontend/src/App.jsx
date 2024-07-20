@@ -24,14 +24,14 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="overflow-hidden">
       <ToastContainer />
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/auth" element={<AuthPage />}></Route>
         <Route path="/dashboard" element={<DashboardPage />}></Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

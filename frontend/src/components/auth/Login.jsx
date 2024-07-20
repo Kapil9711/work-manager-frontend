@@ -15,12 +15,14 @@ const Login = ({ setActive, firstRender }) => {
 
   useGSAP(() => {
     gsap.from(".login", {
-      delay: firstRender ? 1 : 0,
-      duration: 1,
+      delay: firstRender ? 1.5 : 0.2,
+      duration: 1.3,
       opacity: 0,
-      scale: 0.6,
+      skewX: 30,
+      skewY: -20,
+      scale: 0.7,
       x: -500,
-      ease: Expo.easeInOut,
+      ease: Expo.easeOut,
     });
   });
 

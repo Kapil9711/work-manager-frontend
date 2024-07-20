@@ -12,11 +12,14 @@ const ResetPassword = ({ setActive, resetToken }) => {
 
   useGSAP(() => {
     gsap.from(".resetPassword", {
-      duration: 1.2,
+      delay: 0.2,
+      duration: 1.3,
+      skewX: -20,
+      skewY: 20,
       opacity: 0,
       scale: 0.6,
       x: 500,
-      ease: Expo.easeInOut,
+      ease: Expo.easeOut,
     });
   });
 

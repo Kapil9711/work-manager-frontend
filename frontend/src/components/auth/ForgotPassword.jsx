@@ -12,11 +12,14 @@ const ForgotPassword = ({ setActive, setResetToken }) => {
 
   useGSAP(() => {
     gsap.from(".forgotPassword", {
-      duration: 1.1,
+      delay: 0.2,
+      skewX: -20,
+      skewY: 20,
+      duration: 1.3,
       opacity: 0,
       scale: 0.6,
       x: 500,
-      ease: Expo.easeInOut,
+      ease: Expo.easeOut,
     });
   });
 
