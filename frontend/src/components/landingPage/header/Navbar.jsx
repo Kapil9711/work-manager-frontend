@@ -2,8 +2,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import logo from "../../../images/logo.png";
 import { Expo } from "gsap";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   useGSAP(() => {
     gsap.from(".link", {
       delay: 1.4,
@@ -19,18 +21,17 @@ const Navbar = () => {
     <nav className=" z-30  absolute top-0 left-0 w-full   ">
       <ul className="ul links py-5  flex text-2xl sm:container   justify-between ">
         <div>
-          <a href="/">
+          <span>
             <img className="link w-40 h-12" src={logo} alt="logo img" />
-          </a>
+          </span>
         </div>
         <div className="">
-          <a
+          <span
             style={{ textDecoration: "none" }}
             className="hidden sm:inline-block link text-orange-600 hover:text-orange-400  "
-            href={"/"}
           >
             Home
-          </a>
+          </span>
           <a
             style={{ textDecoration: "none" }}
             className="hidden sm:inline-block  link text-orange-600 hover:text-orange-400   ml-10"
@@ -45,13 +46,13 @@ const Navbar = () => {
           >
             Features
           </a>
-          <a
+          <span
             style={{ textDecoration: "none" }}
             className="text-xl ml-10 link text-orange-600 hover:text-orange-400   "
-            href={"/tasks"}
+            onClick={() => navigate("/auth")}
           >
             Dashboard
-          </a>
+          </span>
         </div>
       </ul>
     </nav>
