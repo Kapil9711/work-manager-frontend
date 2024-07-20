@@ -1,4 +1,3 @@
-
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Expo } from "gsap";
@@ -24,7 +23,7 @@ const Texts = () => {
     <>
       <h1
         style={{ WebkitTextStrokeWidth: "2px" }}
-        className="hidden sm:block z-20 italic opacity-0 text-1 absolute text-5xl uppercase  top-48 left-80 ml-2 text-white"
+        className="hidden sm:block z-20 italic opacity-0 text-1 absolute text-5xl uppercase  top-48 left-80 -ml-5 text-white"
       >
         ontime
       </h1>
