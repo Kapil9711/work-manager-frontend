@@ -2,12 +2,11 @@ import gsap, { Expo } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styled from "styled-components";
 import useTheme from "../utilities/Theme";
-import { createContext } from "react";
-
+import { createContext, useState } from "react";
 const ThemeContext = createContext();
-
 import Navbar from "../components/dashboardPage/Navbar";
 
+// styled component styles
 const DashboardWrapper = styled.div`
   background: ${({ theme }) => theme["primary-100"]};
   background: linear-gradient(
@@ -19,9 +18,12 @@ const DashboardWrapper = styled.div`
 `;
 
 const DashboardPage = () => {
-  const [theme, setActiveTheme] = useTheme("light");
-  console.log(theme);
-  console.log(setActiveTheme);
+  const [theme, setActiveTheme] = useTheme(localStorage.getItem("theme"));
+
+  //sync theme for different tabs
+  useState(() => {
+    window.addEventListener("storage", (e) => setActiveTheme(e.newValue));
+  }, []);
 
   useGSAP(() => {
     gsap.from(".dashboard", {
@@ -32,6 +34,7 @@ const DashboardPage = () => {
       ease: Expo.easeInOut,
     });
   });
+
   return (
     <ThemeContext.Provider value={{ theme, setActiveTheme }}>
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">

@@ -4,12 +4,13 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { ThemeContext } from "../../page/DashboardPage";
 
+//styles for nav
 const Nav = styled.nav`
   width: min(100%, 1200px);
   margin-inline: auto;
 `;
-
-const BtnWrapper = styled.button`
+// styles for themebutton
+const ThemeBtn = styled.button`
   background-color: ${({ theme }) =>
     theme.light ? theme["primary-600"] : theme.gray};
   color: ${({ theme }) => (theme.light ? theme["primary-100"] : "black")};
@@ -20,7 +21,6 @@ const BtnWrapper = styled.button`
     background-color: ${({ theme }) => (theme.light ? "#591403" : theme.white)};
     color: ${({ theme }) => (theme.light ? theme["primary-100"] : "black")};
   }
-
   &:focus {
     border: none;
     outline: none;
@@ -87,20 +87,23 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end flex gap-4">
-        <BtnWrapper
-          theme={theme}
-          onClick={() => {
-            setActiveTheme((prev) => (prev === "light" ? "dark" : "light"));
-          }}
-        >
+        <ThemeBtn theme={theme} onClick={() => ToggleTheme(setActiveTheme)}>
           {theme.light ? "dark" : "light"}
-        </BtnWrapper>
+        </ThemeBtn>
         <a>
           <img className="rounded-full w-11 h-11" src={starImg} alt="starImg" />
         </a>
       </div>
     </Nav>
   );
+};
+
+//handle theme toggle and local storage
+const ToggleTheme = (setActiveTheme) => {
+  setActiveTheme((prev) => {
+    localStorage.setItem("theme", prev === "light" ? "dark" : "light");
+    return prev === "light" ? "dark" : "light";
+  });
 };
 
 export default Navbar;
