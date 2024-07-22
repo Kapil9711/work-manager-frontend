@@ -17,7 +17,7 @@ const BtnWrapper = styled.button`
   padding-inline: 20px;
   padding-block: 8px;
   &:hover {
-    background-color: ${({ theme }) => (theme.light ? "black" : theme.white)};
+    background-color: ${({ theme }) => (theme.light ? "#591403" : theme.white)};
     color: ${({ theme }) => (theme.light ? theme["primary-100"] : "black")};
   }
 
