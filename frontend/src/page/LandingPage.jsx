@@ -7,7 +7,6 @@ const LandingPage = () => {
   useEffect(() => {
     setHeight(Number(window.innerHeight));
   }, []);
-
   return (
     <div className="min-h-screen px-4 overflow-hidden sm:px-0  bg-black  text-white">
       <Header height={height} />
@@ -15,5 +14,4 @@ const LandingPage = () => {
     </div>
   );
 };
-
 export default LandingPage;

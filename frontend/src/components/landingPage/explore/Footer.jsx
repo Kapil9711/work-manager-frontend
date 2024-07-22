@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className=" flex justify-center items-end py-4 min-h-32 w-full ">
-      <p className="text-center">&copy;copyright, 2024</p>
+    <foooter className=" flex justify-center items-end py-4 min-h-32 w-full ">
+      <p className=" text-center">&copy;copyright, 2024</p>
       {/* <h2 className="text-4xl sm:text-5xl text-center text-orange-500">
         Footer
       </h2>
@@ -15,7 +15,7 @@ const Footer = () => {
           <li>Dashboard</li>
         </ul>
       </div> */}
-    </footer>
+    </foooter>
   );
 };
 

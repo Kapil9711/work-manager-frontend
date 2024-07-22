@@ -12,4 +12,8 @@ export default defineConfig({
   //   },
   // },
   plugins: [react()],
+  build: {
+    outDir: "../../work-tracker-backend/backend/public/", // Change 'dist' to your desired output directory
+    emptyOutDir: true,
+  },
 });
