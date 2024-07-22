@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import API from "./services/API";
 
 import AuthPage from "./page/AuthPage";
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./page/LandingPage";
 import { ToastContainer } from "react-toastify";
-import DashboardPage from "./page/DashboardPage";
+import { DashboardPage } from "./page/DashboardPage";
 import { useNavigate } from "react-router-dom";
 
 function App() {

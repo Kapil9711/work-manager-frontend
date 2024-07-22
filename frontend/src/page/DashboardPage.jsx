@@ -1,21 +1,27 @@
 import gsap, { Expo } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styled from "styled-components";
-import theme from "../utilities/Theme";
-import { useState } from "react";
+import useTheme from "../utilities/Theme";
+import { createContext } from "react";
+
+const ThemeContext = createContext();
+
+import Navbar from "../components/dashboardPage/Navbar";
 
 const DashboardWrapper = styled.div`
-  background: ${theme["primary-100"]};
+  background: ${({ theme }) => theme["primary-100"]};
   background: linear-gradient(
     43deg,
-    ${theme["primary-100"]} 0%,
-    ${theme["primary-200"]} 48%,
-    ${theme["primary-300"]} 100%
+    ${({ theme }) => theme["primary-100"]} 0%,
+    ${({ theme }) => theme["primary-200"]} 48%,
+    ${({ theme }) => theme["primary-300"]} 100%
   );
 `;
 
 const DashboardPage = () => {
-  const [toggleTheme, setToggleTheme] = useState("");
+  const [theme, setActiveTheme] = useTheme("light");
+  console.log(theme);
+  console.log(setActiveTheme);
 
   useGSAP(() => {
     gsap.from(".dashboard", {
@@ -27,10 +33,12 @@ const DashboardPage = () => {
     });
   });
   return (
-    <DashboardWrapper className="dashboard min-h-screen bg-pink-500 flex justify-center items-center">
-      <h1 className="text-4xl">Dashboard Page</h1>
-    </DashboardWrapper>
+    <ThemeContext.Provider value={{ theme, setActiveTheme }}>
+      <DashboardWrapper theme={theme} className="dashboard min-h-screen">
+        <Navbar />
+      </DashboardWrapper>
+    </ThemeContext.Provider>
   );
 };
 
-export default DashboardPage;
+export { ThemeContext, DashboardPage };
