@@ -1,21 +1,59 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const Footers = styled.footer`
+   
+  border-top: 2px solid #ff9416 ;
+  .home_navigation{
+   background-color:  #ffc00;
+  }
+  .copyright {
+    background-color: #964b00;
+    height: 2rem;
+    line-height: 2em;
+  }
+`;
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
-    <foooter className=" flex justify-center items-end py-4 min-h-32 w-full ">
-      <p className=" text-center">&copy;copyright, 2024</p>
-      {/* <h2 className="text-4xl sm:text-5xl text-center text-orange-500">
-        Footer
-      </h2>
-      <div className="mt-4 mx-auto    max-w-44">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Features</li>
-          <li>Dashboard</li>
-        </ul>
-      </div> */}
-    </foooter>
+    <Footers>
+      <div className="home_navigation flex justify-center items-center py-4 min-h-32 w-full">
+        <a
+          style={{ textDecoration: "none" }}
+          className=" sm:inline-block link text-orange-600 hover:text-orange-400  "
+          href={"#home"}
+        >
+          Home
+        </a>
+        <a
+          style={{ textDecoration: "none" }}
+          className=" sm:inline-block  link text-orange-600 hover:text-orange-400   ml-10"
+          href={"#about"}
+        >
+          About
+        </a>
+        <a
+          style={{ textDecoration: "none" }}
+          className="sm:inline-block   link text-orange-600 hover:text-orange-400   ml-10"
+          href={"#details"}
+        >
+          Features
+        </a>
+        <span
+          style={{ textDecoration: "none" }}
+          className="text-x ml-10 link text-orange-600 hover:text-orange-400   "
+          onClick={() => navigate("/auth")}
+        >
+          Dashboard
+        </span>
+      </div>
+      <div className="copyright">
+        <p className="text-center">&copy;copyright, 2024</p>
+      </div>
+    </Footers>
   );
 };
 
