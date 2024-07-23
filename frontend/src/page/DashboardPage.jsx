@@ -6,11 +6,11 @@ import { createContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 import Navbar from "../components/dashboardPage/Navbar";
 import API from "../services/API";
-import Calendar from "../utilities/Calendar";
 
 import Loading from "../utilities/Loading";
-
-// import Notify from "../utilities/Toasts";
+import Notify from "../utilities/Toasts";
+import DashboardHeader from "../components/dashboardPage/DashboardHeader";
+import Main from "../components/dashboardPage/main/Main";
 
 // styled component styles
 const DashboardWrapper = styled.div`
@@ -28,13 +28,20 @@ const DashboardPage = () => {
   const [endPoint, setEndPoint] = useState("/tasks?filter=false");
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState([]);
 
   //sync theme for different tabs
   useEffect(() => {
     window.addEventListener("storage", (e) => setActiveTheme(e.newValue));
+    const getUser = async () => {
+      const data = await API.getUserProfile();
+      setUser(data.data);
+    };
+    getUser();
   }, []);
 
   useEffect(() => {
+    console.log(endPoint);
     const getData = async () => {
       setIsLoading(true);
       const data = await API.getTasks(endPoint);
@@ -45,6 +52,7 @@ const DashboardPage = () => {
         setTasks(data.data);
       } else {
         setIsLoading(false);
+        setTasks([]);
       }
     };
     getData();
@@ -60,25 +68,32 @@ const DashboardPage = () => {
     });
   });
 
+  const date = endPoint.split("date=")[1];
+
   return (
-    <ThemeContext.Provider value={{ theme, setActiveTheme }}>
+    <ThemeContext.Provider
+      value={{ theme, setActiveTheme, setEndPoint, date, user, setUser }}
+    >
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">
         <Navbar />
-        {isLoading ? (
-          <div className="flex min-h-screen justify-center items-center">
-            <Loading />
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4 min-h-screen justify-center items-center">
-            {tasks.map((task) => {
-              return <h1 key={task.id}>{task.title}</h1>;
-            })}
-          </div>
-        )}
-        <Calendar />
+        <DashboardHeader />
+        <Main />
       </DashboardWrapper>
     </ThemeContext.Provider>
   );
 };
 
 export { ThemeContext, DashboardPage };
+
+// {isLoading ? (
+//   <div className="flex min-h-screen justify-center items-center">
+//     <Loading />
+//   </div>
+// ) : (
+//   <div className="flex flex-col gap-4 min-h-screen justify-center items-center">
+//     {tasks.map((task) => {
+//       return <h1 key={task.id}>{task.title}</h1>;
+//     })}
+//     {tasks.length === 0 && <h1>No Task Found</h1>}
+//   </div>
+// )}

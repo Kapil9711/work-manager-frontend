@@ -3,6 +3,7 @@ import starImg from "../../images/texture.jpg";
 import styled from "styled-components";
 import { useContext } from "react";
 import { ThemeContext } from "../../page/DashboardPage";
+import DropDown from "../../utilities/DropDown";
 
 //styles for nav
 const Nav = styled.nav`
@@ -28,7 +29,7 @@ const ThemeBtn = styled.button`
 `;
 
 const Navbar = () => {
-  const { setActiveTheme, theme } = useContext(ThemeContext);
+  const { setActiveTheme, theme, user, setUser } = useContext(ThemeContext);
   return (
     <Nav className="navbar  bg-transparent">
       <div className="navbar-start">
@@ -68,7 +69,7 @@ const Navbar = () => {
           style={{
             color: theme.light ? theme["primary-600"] : theme["primary-500"],
           }}
-          className="btn btn-ghost text-4xl   md:text-5xl font-bold italic tracking-wider"
+          className="btn btn-ghost text-2xl -ml-6 sm:ml:0   md:text-4xl font-bold italic tracking-wider"
         >
           Listify
         </a>
@@ -86,12 +87,18 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end flex gap-4">
+      <div className="navbar-end flex sm:gap-8">
         <ThemeBtn theme={theme} onClick={() => ToggleTheme(setActiveTheme)}>
           {theme.light ? "dark" : "light"}
         </ThemeBtn>
-        <a>
-          <img className="rounded-full w-11 h-11" src={starImg} alt="starImg" />
+        <a className="flex  items-center">
+          {/* <img className="rounded-full w-11 h-11" src={starImg} alt="starImg" /> */}
+
+          <DropDown starImg={starImg} user={user} setUser={setUser} />
+
+          {/* <p className="hidden sm:block text-white text-xl font-bold tracking-wide">
+            {user.username}
+          </p> */}
         </a>
       </div>
     </Nav>
