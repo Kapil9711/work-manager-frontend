@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import Login from "../components/auth/Login";
-import Register from "../components/auth/Register";
-import ForgotPassword from "../components/auth/ForgotPassword";
-import ResetPassword from "../components/auth/ResetPassword";
+import Login from "../components/authPage/Login";
+import Register from "../components/authPage/Register";
+import ForgotPassword from "../components/authPage/ForgotPassword";
+import ResetPassword from "../components/authPage/ResetPassword";
 import gsap, { Expo } from "gsap";
 import { useGSAP } from "@gsap/react";
+
 const AuthPage = () => {
   const [isActive, setActive] = useState("login");
   const [firstRender, setFirstRender] = useState(true);
@@ -25,7 +26,10 @@ const AuthPage = () => {
   });
 
   return (
-    <div className="auth w-full  min-h-screen bg-orange-600 flex justify-center items-center overflow-hidden">
+    <div
+      // style={{ backgroundImage: `url(${authBgImage})` }}
+      className="auth w-full  min-h-screen bg-orange-600 flex justify-center items-center overflow-hidden"
+    >
       {isActive === "login" && (
         <Login firstRender={firstRender} setActive={setActive} />
       )}

@@ -62,20 +62,42 @@ class API {
     }
   }
 
-  //get all tasks => /api/v1/tasks
-  async getTasks(endPoint) {
+  //veryfi is user logged in => /api/v1/tasks
+  async isUserLoggedin() {
     try {
-      const { data } = await this.api.get(endPoint);
+      const { data } = await this.api.get("/verify");
       return data;
     } catch (error) {
       return error.response.data;
     }
   }
 
-  //very is user logged in => /api/v1/tasks
-  async isUserLoggedin() {
+  //user profile => /api/v1/profile
+  async getUserProfile() {
     try {
-      const { data } = await this.api.get("/verify");
+      const { data } = await this.api.get("/profile");
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
+  //update profile => /api/v1/profile
+  async updateProfile(endPoint, body) {
+    try {
+      const { data } = await this.api.put(endPoint, body);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
+  // *************************************task api*****************
+
+  //get all tasks => /api/v1/tasks
+  async getTasks(endPoint) {
+    try {
+      const { data } = await this.api.get(endPoint);
       return data;
     } catch (error) {
       return error.response.data;
