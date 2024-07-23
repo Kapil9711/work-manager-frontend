@@ -62,20 +62,22 @@ class API {
     }
   }
 
-  //get all tasks => /api/v1/tasks
-  async getTasks(endPoint) {
+  //very is user logged in => /api/v1/tasks
+  async isUserLoggedin() {
     try {
-      const { data } = await this.api.get(endPoint);
+      const { data } = await this.api.get("/verify");
       return data;
     } catch (error) {
       return error.response.data;
     }
   }
 
-  //very is user logged in => /api/v1/tasks
-  async isUserLoggedin() {
+  // *************************************task api*****************
+
+  //get all tasks => /api/v1/tasks
+  async getTasks(endPoint) {
     try {
-      const { data } = await this.api.get("/verify");
+      const { data } = await this.api.get(endPoint);
       return data;
     } catch (error) {
       return error.response.data;
