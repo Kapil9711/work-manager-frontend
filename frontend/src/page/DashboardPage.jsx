@@ -45,7 +45,6 @@ const DashboardPage = () => {
     const getData = async () => {
       setIsLoading(true);
       const data = await API.getTasks(endPoint);
-      console.log(data);
       if (data.success) {
         setIsLoading(false);
         localStorage.setItem("tasks" + endPoint, JSON.stringify(data.data));
@@ -72,7 +71,7 @@ const DashboardPage = () => {
 
   return (
     <ThemeContext.Provider
-      value={{ theme, setActiveTheme, setEndPoint, date, user, setUser }}
+      value={{ theme, setActiveTheme, setEndPoint, date, user, setUser, tasks }}
     >
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">
         <Navbar />

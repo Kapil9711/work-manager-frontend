@@ -22,7 +22,7 @@ const DashboardHeader = () => {
       </div>
       {/* <p className="text-white text-2xl">Welcome, {user.username}</p> */}
       <button
-        className={`text-xl  text-white py-2 px-5 rounded-lg   ${
+        className={`text-xl  text-white py-3 px-6 rounded-full   ${
           theme.light
             ? "bg-orange-800 hover:bg-orange-600"
             : "bg-[#f46645] hover:bg-orange-500"
