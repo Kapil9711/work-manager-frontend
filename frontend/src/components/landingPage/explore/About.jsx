@@ -3,6 +3,11 @@ import { useGSAP } from "@gsap/react";
 // import aboutBg from "../../../images/background-removed-about.png";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { Expo } from "gsap";
+import styled from "styled-components";
+
+const Section = styled.section`
+& .shadow{box-shadow: -5px 6px 18px -3px #edac70;};
+`;
 
 const About = () => {
   useGSAP(() => {
@@ -48,7 +53,7 @@ const About = () => {
     });
   });
   return (
-    <section
+    <Section
       id="about"
       className="sm:relative sm:container pb-40 sm:gap-16 sm:flex sm:items-center sm:flex-col  mx-auto min-h-screen about"
     >
@@ -74,10 +79,10 @@ const About = () => {
 
         <div
           id="a"
-          className="mt-10 sm:mt-0 sm:absolute sm:top-16 sm:left-40  sm:w-96"
+          className=" mt-10 sm:mt-0 sm:absolute sm:top-16 sm:left-40  sm:w-96"
         >
           <strong className="text-xl sm:text-2xl">Introduction :</strong>
-          <p className=" mx-auto  p-2  mt-4  border border-orange-500 leading-7 tracking-wide text-gray-400 hover:text-gray-300 sm:text-xl sm:pl-4 sm:max-w-2/3  sm:hover:scale-105 transition-all duration-500 ease-in-out">
+          <p className="shadow mx-auto  p-2  mt-4  border border-orange-500 leading-7 tracking-wide text-gray-400 hover:text-gray-300 sm:text-xl sm:pl-4 sm:max-w-2/3  sm:hover:scale-105 transition-all duration-500 ease-in-out">
             Welcome to Listify, your go-to platform for staying organized and
             productive. Whether you're managing personal tasks, professional
             projects, or collaborative efforts, we've got you covered
@@ -85,10 +90,10 @@ const About = () => {
         </div>
         <div
           id="b"
-          className="sm:absolute top-56 -left-96 sm:w-96 mt-10 sm:mt-0 sm:-ml-40"
+          className=" sm:absolute top-56 -left-96 sm:w-96 mt-10 sm:mt-0 sm:-ml-40"
         >
           <strong className="text-xl sm:text-2xl">Our Mission :</strong>
-          <p className="  mx-auto  sm:pl-4  p-2 mt-4  border border-orange-500 leading-7 tracking-wide text-gray-400 hover:text-gray-300 sm:text-xl sm:max-w-2/3  sm:hover:scale-105 transition-all duration-500 ease-in-out">
+          <p className="shadow  mx-auto  sm:pl-4  p-2 mt-4  border border-orange-500 leading-7 tracking-wide text-gray-400 hover:text-gray-300 sm:text-xl sm:max-w-2/3  sm:hover:scale-105 transition-all duration-500 ease-in-out">
             Our mission is to make task management effortless for everyone. We
             aim to empower individuals and teams to achieve their goals and
             manage their time more effectively with a seamless, user-friendly
@@ -98,10 +103,10 @@ const About = () => {
 
         <div
           id="c"
-          className="mt-8 sm:absolute top-96 left-40 sm:w-96 sm:mt-28"
+          className=" mt-8 sm:absolute top-96 left-40 sm:w-96 sm:mt-28"
         >
           <strong className="text-xl sm:text-2xl">Our Story :</strong>
-          <p className=" mx-auto  sm:pl-4  p-2 mt-4  border border-orange-500 leading-7 tracking-wide text-gray-400 hover:text-gray-300 sm:text-xl sm:max-w-2/3  sm:hover:scale-105 transition-all duration-500 ease-in-out">
+          <p className="shadow mx-auto  sm:pl-4  p-2 mt-4  border border-orange-500 leading-7 tracking-wide text-gray-400 hover:text-gray-300 sm:text-xl sm:max-w-2/3  sm:hover:scale-105 transition-all duration-500 ease-in-out">
             Founded in 2024, Listify was born out of a simple idea: to create an
             intuitive and powerful to-do list app that anyone can use.
           </p>
@@ -167,7 +172,7 @@ const About = () => {
         </li>
         <li></li>
       </ul> */}
-    </section>
+    </Section>
   );
 };
 
