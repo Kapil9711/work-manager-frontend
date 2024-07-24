@@ -1,6 +1,9 @@
+import { useState } from "react";
+import Modal from "./Modal";
 import ModalSetting from "./ModalSetting";
 
 const DropDown = ({ user, setUser, starImg }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="dropdown dropdown-hover">
       <div
@@ -20,9 +23,14 @@ const DropDown = ({ user, setUser, starImg }) => {
         <li>
           <a>{user.email}</a>
         </li>
-        <li>
-          <ModalSetting user={user} setUser={setUser} />
+        <li className="btn btn-ghost text-xl" onClick={() => setIsOpen(true)}>
+          Setting
         </li>
+        {isOpen && (
+          <Modal setIsOpen={setIsOpen}>
+            <ModalSetting user={user} setUser={setUser} />
+          </Modal>
+        )}
       </ul>
     </div>
   );

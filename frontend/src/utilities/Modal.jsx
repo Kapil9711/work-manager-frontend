@@ -20,15 +20,15 @@ const Modal = ({ setIsOpen, children }) => {
       style={{
         background: "rgba(9, 8, 8,.8)",
       }}
-      className="hidden  absolute sm:flex bg-[] justify-center items-center z-50 top-[400px] sm:top-0 h-screen w-screen"
+      className=" absolute flex justify-center items-center z-50   top-0 h-screen w-screen"
     >
       <Wrapper
         theme={theme}
-        className=" w-[95%] h-[70%] sm:w-[70%] sm:h-[90%] rounded-3xl relative"
+        className=" w-[95%] h-[85%] sm:w-[70%] sm:h-[90%] rounded-3xl relative"
       >
         {children}
         <button
-          className="absolute top-0 right-5  text-white btn btn-ghost  text-5xl"
+          className="absolute top-0 right-0 sm:right-5  text-white btn btn-ghost  text-5xl"
           onClick={() => setIsOpen(false)}
         >
           X
