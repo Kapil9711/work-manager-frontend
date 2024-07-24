@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../../../page/DashboardPage";
 import { nextDate, prevDate } from "../../../utilities/nextDate";
 
@@ -29,20 +28,22 @@ const MainHeader = () => {
         <p
           onClick={() => setActive(i)}
           key={date}
-          className={`h-12 cursor-pointer ${
+          className={`h-12  cursor-pointer ${
             active != i && "hover:bg-red-500"
-          }   relative w-12 flex items-center justify-center rounded-full    `}
+          }  ${
+            active === i && "bg-red-500"
+          }  relative w-12 flex items-center justify-center rounded-full    `}
         >
           <span
-            style={{ fontSize: active === i ? "30px" : "18px" }}
-            className={`  ${active === i && "font-bold"} `}
+            style={{ fontSize: active === i ? "26px" : "18px" }}
+            className={`text-white  ${active === i && "font-bold"} `}
           >
             {date}
           </span>
           <span
             className={`${
-              active === i && "border-t-[56px] border-[#f6d7d5]"
-            }  absolute top-0 -z-10 h-28 w-28    rounded-t-full `}
+              active === i && "border-t-[56px] border-transparent"
+            }  absolute -top-10 -z-10 h-28 w-28    rounded-t-full `}
           ></span>
         </p>
       ))}

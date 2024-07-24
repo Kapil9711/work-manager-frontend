@@ -25,13 +25,16 @@ const DashboardWrapper = styled.div`
 
 const DashboardPage = () => {
   const [theme, setActiveTheme] = useTheme(localStorage.getItem("theme"));
-  const [endPoint, setEndPoint] = useState("/tasks?filter=false");
+  const [endPoint, setEndPoint] = useState("/tasks");
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState([]);
+  const [width, setWidth] = useState(0);
 
   //sync theme for different tabs
   useEffect(() => {
+    setWidth(window.innerWidth);
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
     window.addEventListener("storage", (e) => setActiveTheme(e.newValue));
     const getUser = async () => {
       const data = await API.getUserProfile();
@@ -71,7 +74,16 @@ const DashboardPage = () => {
 
   return (
     <ThemeContext.Provider
-      value={{ theme, setActiveTheme, setEndPoint, date, user, setUser, tasks }}
+      value={{
+        theme,
+        setActiveTheme,
+        setEndPoint,
+        date,
+        user,
+        setUser,
+        tasks,
+        width,
+      }}
     >
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">
         <Navbar />

@@ -11,6 +11,7 @@ const light = {
 
   white: "hsl(0,0%,100%)",
   gray: "hsl(0, 0%, 92%)",
+
   green: "#d1f96c",
 };
 

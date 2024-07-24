@@ -8,6 +8,7 @@ import MainHeader from "./MainHeader";
 import converToNestedArr from "../../../utilities/convertTaskintoNestedArr";
 import { useGSAP } from "@gsap/react";
 import gsap, { Expo } from "gsap";
+import Modal from "../../../utilities/Modal";
 
 const MainWrapper = styled.main`
   width: min(100%, 1200px);
