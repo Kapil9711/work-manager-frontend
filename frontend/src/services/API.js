@@ -103,6 +103,15 @@ class API {
       return error.response.data;
     }
   }
+
+  async newTask(endPoint, body) {
+    try {
+      const { data } = await this.api.post(endPoint, body, this.headers);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
 }
 console.log(url);
 

@@ -7,9 +7,9 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme["primary-100"]};
   background: linear-gradient(
     43deg,
-    ${({ theme }) => theme["primary-100"]} 0%,
-    ${({ theme }) => theme["primary-200"]} 48%,
-    ${({ theme }) => theme["primary-300"]} 100%
+    ${({ theme }) => (theme.light ? theme["primary-100"] : "#ffe4e1")} 0%,
+    ${({ theme }) => (theme.light ? theme["primary-200"] : "#f89487")} 48%,
+    ${({ theme }) => (theme.light ? theme["primary-300"] : "#f46645")} 100%
   );
 `;
 
@@ -24,11 +24,14 @@ const Modal = ({ setIsOpen, children }) => {
     >
       <Wrapper
         theme={theme}
-        className=" w-[95%] h-[70%] sm:w-[70%] sm:h-[90%] rounded-3xl"
+        className=" w-[95%] h-[70%] sm:w-[70%] sm:h-[90%] rounded-3xl relative"
       >
         {children}
-        <button className="btn btn-accent" onClick={() => setIsOpen(false)}>
-          close
+        <button
+          className="absolute top-0 right-5  text-white btn btn-ghost  text-5xl"
+          onClick={() => setIsOpen(false)}
+        >
+          X
         </button>
       </Wrapper>
     </div>,
@@ -36,18 +39,5 @@ const Modal = ({ setIsOpen, children }) => {
     document.getElementById("portal")
   );
 };
-
-// const ModalWrappwer = ({ styles, content, children }) => {
-//   const { theme } = useContext(ThemeContext);
-//   const [isOpen, setIsOpen] = useState(false);
-//   return (
-//     <div>
-//       <button className={styles} onClick={() => setIsOpen(true)}>
-//         {content}
-//       </button>
-//       {isOpen && <Modal setIsOpen={setIsOpen}>{children}</Modal>}
-//     </div>
-//   );
-// };
 
 export default Modal;

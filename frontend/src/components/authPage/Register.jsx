@@ -6,8 +6,6 @@ import Notify from "../../utilities/Toasts";
 import gsap, { Expo } from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const Form = styled.form``;
-
 const Register = ({ setActive }) => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
@@ -60,7 +58,7 @@ const Register = ({ setActive }) => {
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Register
       </h2>
-      <Form
+      <form
         autoComplete="off"
         onSubmit={handleSubmit}
         className="flex flex-col gap-5"
@@ -119,7 +117,7 @@ const Register = ({ setActive }) => {
             Register
           </button>
         )}
-      </Form>
+      </form>
       <p className="text-center mt-5 text-xl">
         Already Registered ,{" "}
         <span

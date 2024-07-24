@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../page/DashboardPage";
 import Modal from "../../utilities/Modal";
+import AddTask from "./AddTask";
 
 const DashHeader = styled.nav`
   width: min(100%, 1200px);
@@ -37,7 +38,7 @@ const DashboardHeader = () => {
       >
         + Add Task
       </button>
-      {isOpen && <Modal setIsOpen={setIsOpen}>Children</Modal>}
+      {isOpen && <Modal setIsOpen={setIsOpen}>{<AddTask />}</Modal>}
     </DashHeader>
   );
 };

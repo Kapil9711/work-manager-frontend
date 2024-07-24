@@ -29,6 +29,7 @@ const DashboardPage = () => {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   const [width, setWidth] = useState(0);
 
   //sync theme for different tabs
@@ -58,7 +59,7 @@ const DashboardPage = () => {
       }
     };
     getData();
-  }, [endPoint]);
+  }, [endPoint, refresh]);
 
   useGSAP(() => {
     gsap.from(".dashboard", {
@@ -83,6 +84,7 @@ const DashboardPage = () => {
         setUser,
         tasks,
         width,
+        setRefresh,
       }}
     >
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">
