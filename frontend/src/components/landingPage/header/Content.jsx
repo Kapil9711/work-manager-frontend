@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Section = styled.section`
-  z-index: 0;
   overflow: hidden;
 
   @keyframes rotate {
@@ -40,7 +39,7 @@ const Section = styled.section`
     top: 6px;
     width: calc(100% - 12px);
     height: calc(100% - 12px);
-     background: black;
+    background: black;
     border-radius: 5px;
   }
 `;
@@ -53,7 +52,7 @@ const Content = () => {
       duration: 2,
       y: 10,
       opacity: 0,
-      ease: Expo.easeInOut
+      ease: Expo.easeInOut,
     });
 
     gsap.from(".content p", {
@@ -61,7 +60,7 @@ const Content = () => {
       duration: 2,
       y: 30,
       opacity: 0,
-      ease: Expo.easeInOut
+      ease: Expo.easeInOut,
     });
 
     gsap.from(".content button", {
@@ -69,16 +68,16 @@ const Content = () => {
       duration: 2,
       y: 30,
       opacity: 0,
-      ease: Expo.easeInOut
+      ease: Expo.easeInOut,
     });
   });
   return (
-    <Section className="z-30  justify-center  content border-2 border-orange-500 px-2 py-4 absolute right-0 sm:right-40 bottom-1 sm:bottom-12 sm:w-96 ">
+    <Section className="z-50  justify-center  content border-2 border-orange-500 px-2 py-4 absolute right-0 sm:right-40 bottom-1 sm:bottom-12 sm:w-96 ">
       <p className="sm:leading-7 text-sm  sm:text-lg">
         Welcome to Listify, your ultimate companion for staying organized and
         productive!
       </p>
-      <button className="block max-w-60 mx-auto">
+      <button className="block max-w-60 mx-auto relative z-50">
         <span
           onClick={() => navigate("/auth")}
           className="block w-full mt-4 text-2xl hover:bg-orange-600   bg-orange-500  py-4 px-10  text-white"

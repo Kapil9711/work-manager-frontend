@@ -85,7 +85,7 @@ const Details = () => {
 
   return (
     <section
-      style={{ height: "980px" }}
+      style={{ height: "980px", maxWidth: "1280px" }}
       className=" relative   details sm:container min-h-screen   pt-20 mx-auto"
     >
       <h2

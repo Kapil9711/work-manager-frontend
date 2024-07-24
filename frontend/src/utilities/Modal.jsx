@@ -1,7 +1,10 @@
 import ReactDom from "react-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../page/DashboardPage";
 import styled from "styled-components";
+
+import { useGSAP } from "@gsap/react";
+import gsap, { Expo } from "gsap";
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme["primary-100"]};
@@ -15,12 +18,22 @@ const Wrapper = styled.div`
 
 const Modal = ({ setIsOpen, children }) => {
   const { theme } = useContext(ThemeContext);
+
+  useGSAP(() => {
+    gsap.from(".outside", {
+      duration: 0.8,
+      scale: 0,
+      ease: Expo.easeOut,
+      opacity: 0,
+    });
+  });
+
   return ReactDom.createPortal(
     <div
       style={{
         background: "rgba(9, 8, 8,.8)",
       }}
-      className=" absolute flex justify-center items-center z-50   top-0 h-screen w-screen"
+      className="outside absolute flex justify-center items-center z-50   top-0 h-screen w-screen"
     >
       <Wrapper
         theme={theme}

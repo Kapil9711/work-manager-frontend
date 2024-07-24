@@ -7,7 +7,7 @@ const Header = ({ height }) => {
   console.log("header");
   return (
     <header
-      style={{ maxHeight: "720px", maxWidth: "1280px" }}
+      style={{ maxHeight: "720px", minHeight: "715px", maxWidth: "1280px" }}
       className=" sm:container font-sans relative h-screen mx-auto pt-20 "
     >
       <Navbar />

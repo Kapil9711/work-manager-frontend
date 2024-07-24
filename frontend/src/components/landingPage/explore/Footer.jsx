@@ -1,12 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Footers = styled.footer`
-   
-  border-top: 2px solid #ff9416 ;
-  .home_navigation{
-   background-color:  #ffc00;
+  border-top: 2px solid #ff9416;
+  .home_navigation {
+    /* background-color:  #ffc00; */
   }
   .copyright {
     background-color: #964b00;

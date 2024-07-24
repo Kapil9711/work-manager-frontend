@@ -62,10 +62,20 @@ class API {
     }
   }
 
-  //veryfi is user logged in => /api/v1/tasks
+  //veryfi is user logged in => /api/v1/verify
   async isUserLoggedin() {
     try {
       const { data } = await this.api.get("/verify");
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
+  //logout user => /api/v1/logout
+  async logoutUser() {
+    try {
+      const { data } = await this.api.get("/logout");
       return data;
     } catch (error) {
       return error.response.data;
@@ -103,7 +113,7 @@ class API {
       return error.response.data;
     }
   }
-
+  //create new task => /api/v1/task/new
   async newTask(endPoint, body) {
     try {
       const { data } = await this.api.post(endPoint, body, this.headers);

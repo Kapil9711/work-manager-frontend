@@ -1,9 +1,22 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import ModalSetting from "./ModalSetting";
+import API from "../services/API";
+import Notify from "./Toasts";
+import { useNavigate } from "react-router-dom";
 
 const DropDown = ({ user, setUser, starImg }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const logoutUser = async () => {
+    const data = await API.logoutUser();
+    if (data.success) {
+      Notify("success", "Logout successfully");
+      navigate("/");
+    } else Notify("error", data.message);
+  };
+
   return (
     <div className="dropdown dropdown-hover">
       <div
@@ -20,11 +33,11 @@ const DropDown = ({ user, setUser, starImg }) => {
         tabIndex={0}
         className="dropdown-content -ml-36 sm:ml-0 menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
       >
-        <li>
-          <a>{user.email}</a>
-        </li>
         <li className="btn btn-ghost text-xl" onClick={() => setIsOpen(true)}>
           Setting
+        </li>
+        <li className="btn btn-ghost text-sm" onClick={logoutUser}>
+          Log Out
         </li>
         {isOpen && (
           <Modal setIsOpen={setIsOpen}>
