@@ -4,6 +4,7 @@ import ModalSetting from "./ModalSetting";
 import API from "../services/API";
 import Notify from "./Toasts";
 import { useNavigate } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const DropDown = ({ user, setUser, starImg }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,9 +35,10 @@ const DropDown = ({ user, setUser, starImg }) => {
         className="dropdown-content -ml-36 sm:ml-0 menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
       >
         <li className="btn btn-ghost text-xl" onClick={() => setIsOpen(true)}>
-          Setting
+          Profile
         </li>
-        <li className="btn btn-ghost text-sm" onClick={logoutUser}>
+        <li className="btn btn-ghost text-sm flex gap-2" onClick={logoutUser}>
+          {/* <FaSignOutAlt className="text-white bg-black" /> */}
           Log Out
         </li>
         {isOpen && (
