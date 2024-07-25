@@ -9,6 +9,7 @@ import converToNestedArr from "../../../utilities/convertTaskintoNestedArr";
 import { useGSAP } from "@gsap/react";
 import gsap, { Expo } from "gsap";
 import dayjs from "dayjs";
+import Loading from "../../../utilities/Loading";
 // import Modal from "../../../utilities/Modal";
 
 const MainWrapper = styled.main`
@@ -23,12 +24,22 @@ const TastShow = styled.div`
   }};
 `;
 
-const Main = () => {
-  const { setEndPoint, theme, date, tasks } = useContext(ThemeContext);
-  const [value, setValue] = useState(dayjs(new Date().toDateString()));
+const daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
+const Main = () => {
+  const { setEndPoint, theme, date, tasks, isLoading } =
+    useContext(ThemeContext);
+  const [value, setValue] = useState(dayjs(new Date().toDateString()));
+  const day = daysOfWeek[date.split("-")[3]];
   const nestedTask = converToNestedArr(tasks);
-  console.log(tasks);
 
   useGSAP(() => {
     gsap.from(".box", {
@@ -49,14 +60,17 @@ const Main = () => {
         className="h-screen sm:h-[500px] rounded-[28px] overflow-hidden"
       >
         <section className="mt-2 px-5 flex justify-between items-center">
-          <h1 className="text-white font-bold tracking-wide text-2xl ">
+          <h1 className="text-white font-bold sm:tracking-wide text-lg sm:text-2xl ">
             {getDateAndDay(date)}
           </h1>
 
-          <p className="tracking-wide text-xl  font-bold text-white">
+          <p className="tracking-wide text-sm sm:text-xl  font-bold text-white">
             Tasks-{tasks.length}
           </p>
-          <p> dffdfsffdfdsakfds</p>
+          <p className="text-lg sm:text-2xl font-bold tracking-wide text-white">
+            {" "}
+            {day}
+          </p>
         </section>
         <div
           style={{ scrollbarWidth: "none" }}
@@ -65,15 +79,21 @@ const Main = () => {
           } `}
         >
           <MainHeader setValue={setValue} />
-          <div className="relative z-10 flex flex-col gap-8  ">
-            {nestedTask.map((tasks, i) => (
-              <Box
-                tasks={tasks}
-                key={tasks[0].id}
-                position={i % 2 === 0 ? "self-end" : "self-start"}
-              />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="h-40 flex justify-center items-center">
+              <Loading />
+            </div>
+          ) : (
+            <div className="relative z-10 flex flex-col gap-8  ">
+              {nestedTask.map((tasks, i) => (
+                <Box
+                  tasks={tasks}
+                  key={tasks[0].id}
+                  position={i % 2 === 0 ? "self-end" : "self-start"}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </TastShow>
     </MainWrapper>

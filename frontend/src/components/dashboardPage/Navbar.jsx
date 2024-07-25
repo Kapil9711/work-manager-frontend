@@ -1,5 +1,5 @@
 import Button from "../../utilities/Button";
-import starImg from "../../images/texture.jpg";
+import starImg from "../../images/user.png";
 import styled from "styled-components";
 import { useContext } from "react";
 import { ThemeContext } from "../../page/DashboardPage";

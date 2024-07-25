@@ -85,6 +85,7 @@ const DashboardPage = () => {
         tasks,
         width,
         setRefresh,
+        isLoading,
       }}
     >
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">
