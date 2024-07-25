@@ -37,7 +37,7 @@ const Modal = ({ setIsOpen, children }) => {
     >
       <Wrapper
         theme={theme}
-        className=" w-[95%] h-[85%] sm:w-[70%] sm:h-[90%] rounded-3xl relative"
+        className="px-4 sm-px-0 w-[90%]  h-[90%] sm:w-[70%] sm:h-[90%] rounded-3xl relative"
       >
         {children}
         <button

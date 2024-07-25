@@ -4,7 +4,6 @@ import ModalSetting from "./ModalSetting";
 import API from "../services/API";
 import Notify from "./Toasts";
 import { useNavigate } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
 
 const DropDown = ({ user, setUser, starImg }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +12,7 @@ const DropDown = ({ user, setUser, starImg }) => {
   const logoutUser = async () => {
     const data = await API.logoutUser();
     if (data.success) {
-      Notify("success", "Logout successfully");
+      Notify("success", "Logout successfull");
       navigate("/");
     } else Notify("error", data.message);
   };

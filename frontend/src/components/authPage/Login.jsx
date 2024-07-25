@@ -34,7 +34,6 @@ const Login = ({ setActive, firstRender }) => {
       password: passwordRef.current.value,
     };
     const data = await API.login("/login", body);
-    console.log(data);
     if (data.success) {
       Notify("success", data.message);
       setLoading(false);
@@ -48,10 +47,10 @@ const Login = ({ setActive, firstRender }) => {
     <div
       style={{
         width: "min(95%,420px)",
-        background: "hsl(20, 100%, 56%)",
-        // background: "#fa5828",
+        background: "hsl(11, 89%, 62%)",
+        // background: "#862103",
       }}
-      className="login border-2 rounded-xl py-8 px-5 shadow-2xl"
+      className="login border-r-[2px] border-l-[2px]  border-t-[10px] border-b-[10px] rounded-3xl py-8 px-5 shadow-lg shadow-black border-orange-950"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         Login

@@ -1,11 +1,14 @@
 import { useRef, useState } from "react";
 import API from "../services/API";
 import Notify from "./Toasts";
+import Loading from "./Loading";
+
 // import { useGSAP } from "@gsap/react";
 // import gsap, { Expo } from "gsap";
 
 const ModalSetting = ({ user, setUser }) => {
   const [active, setActive] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const usernameRef = useRef(null);
   // const emailRef = useRef(null);
   const oldPasswordRef = useRef(null);
@@ -13,6 +16,7 @@ const ModalSetting = ({ user, setUser }) => {
 
   const updateProfileData = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let bodyData = {
       username: usernameRef.current?.value,
       // email: emailRef.current?.value,
@@ -30,16 +34,20 @@ const ModalSetting = ({ user, setUser }) => {
 
     const data = await API.updateProfile(endPoint, bodyData);
     if (data.success) {
+      setIsLoading(false);
       if (active === "Password") {
         return Notify("success", "Password updated successfully");
       }
-      Notify("success", "Profile updated");
+      Notify("success", "Username updated successfully");
       setUser(data.data);
-    } else Notify("error", data.message);
+    } else {
+      Notify("error", data.message);
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="setting bg-[#f57156] max-w-[500px] mx-auto mt-8 border-t-8 border-b-8  rounded-3xl border-black shadow-lg shadow-black pb-8">
+    <div className="setting  bg-[#f57156] max-w-[500px] mx-auto mt-16 sm:mt-8 border-t-8 border-b-8  rounded-3xl border-black shadow-lg shadow-black sm:pb-8 pb-16">
       <h3 className="font-bold text-2xl text-center pt-4">
         Hello! {user.username}
       </h3>
@@ -97,7 +105,7 @@ const ModalSetting = ({ user, setUser }) => {
                 </label>
                 <input
                   ref={usernameRef}
-                  className="w-full text-black tracking-wide  text-2xl border-l-4 border-r-4 border-t-2 border-b-2 border-black rounded-lg focus:outline-none px-4 h-12"
+                  className="w-full text-black tracking-wider font-bold  text-xl border-l-4 border-r-4 border-t-2 border-b-2 border-black rounded-lg focus:outline-none px-4 h-12"
                   type="text"
                   id="name"
                 />
@@ -125,8 +133,8 @@ const ModalSetting = ({ user, setUser }) => {
                 </label>
                 <input
                   ref={oldPasswordRef}
-                  className="w-full text-black tracking-wide  text-2xl border-l-4 border-r-4 border-t-2 border-b-2 border-black rounded-lg focus:outline-none px-4 h-12"
-                  type="email"
+                  className="w-full text-black tracking-wider font-bold  text-xl border-l-4 border-r-4 border-t-2 border-b-2 border-black rounded-lg focus:outline-none px-4 h-12"
+                  type="text"
                   id="name"
                 />
               </div>
@@ -139,16 +147,21 @@ const ModalSetting = ({ user, setUser }) => {
                 </label>
                 <input
                   ref={newPasswordRef}
-                  className="w-full text-black tracking-wide  text-2xl border-l-4 border-r-4 border-t-2 border-b-2 border-black rounded-lg focus:outline-none px-4 h-12"
-                  type="email"
+                  className="w-full text-black tracking-wider font-bold  text-xl border-l-4 border-r-4 border-t-2 border-b-2 border-black rounded-lg focus:outline-none px-4 h-12"
+                  type="text"
                   id="name"
                 />
               </div>
             )}
-
-            <button className="btn block btn-accent btn-sm mx-auto mt-5">
-              Update
-            </button>
+            {isLoading ? (
+              <div className="flex justify-center h-16">
+                <Loading />
+              </div>
+            ) : (
+              <button className="btn block btn-accent btn-sm   mx-auto mt-5">
+                Update
+              </button>
+            )}
           </form>
         </div>
       )}

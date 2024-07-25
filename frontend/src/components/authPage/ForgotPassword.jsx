@@ -47,9 +47,9 @@ const ForgotPassword = ({ setActive, setResetToken }) => {
     <div
       style={{
         width: "min(95%,420px)",
-        background: "hsl(20, 100%, 56%)",
+        background: "hsl(11, 89%, 62%)",
       }}
-      className="forgotPassword border-2 rounded-xl py-8 px-5 bg-orange-500 shadow-2xl"
+      className="forgotPassword border-r-[2px] border-l-[2px]  border-t-[10px] border-b-[10px] rounded-3xl py-8 px-5 shadow-lg shadow-black border-orange-950"
     >
       <h2 className="text-3xl text-center underline text-white font-bold mb-8">
         ForgotPassword

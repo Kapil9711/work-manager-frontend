@@ -5,6 +5,15 @@ import ForgotPassword from "../components/authPage/ForgotPassword";
 import ResetPassword from "../components/authPage/ResetPassword";
 import gsap, { Expo } from "gsap";
 import { useGSAP } from "@gsap/react";
+import styled from "styled-components";
+
+const AuthWrapper = styled.div`
+  background-image: radial-gradient(
+    circle 311px at 8.6% 27.9%,
+    rgba(62, 147, 252, 0.57) 12.9%,
+    rgba(239, 183, 192, 0.44) 91.2%
+  );
+`;
 
 const AuthPage = () => {
   const [isActive, setActive] = useState("login");
@@ -26,9 +35,9 @@ const AuthPage = () => {
   });
 
   return (
-    <div
+    <AuthWrapper
       // style={{ backgroundImage: `url(${authBgImage})` }}
-      className="auth w-full  min-h-screen bg-orange-600 flex justify-center items-center overflow-hidden"
+      className="auth w-full  min-h-screen  flex justify-center items-center overflow-hidden"
     >
       {isActive === "login" && (
         <Login firstRender={firstRender} setActive={setActive} />
@@ -40,7 +49,7 @@ const AuthPage = () => {
       {isActive === "resetPassword" && (
         <ResetPassword resetToken={resetToken} setActive={setActive} />
       )}
-    </div>
+    </AuthWrapper>
   );
 };
 
