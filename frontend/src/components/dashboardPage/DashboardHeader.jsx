@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../page/DashboardPage";
 import Modal from "../../utilities/Modal";
 import AddTask from "./AddTask";
+import { heIL } from "@mui/x-date-pickers/locales";
 
 const DashHeader = styled.nav`
   width: min(100%, 1200px);
@@ -10,10 +11,14 @@ const DashHeader = styled.nav`
 `;
 
 const DashboardHeader = () => {
-  const { theme, width } = useContext(ThemeContext);
+  const { theme, width, height } = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <DashHeader className="flex justify-between items-center px-4 sm:px-0  mt-5">
+    <DashHeader
+      className={`flex justify-between items-center px-4 sm:px-0 ${
+        height > 750 ? "mt-10" : "mt-5"
+      } `}
+    >
       <div>
         <h1 className="text-xl text-white sm:text-3xl font-bold tracking-wide">
           My Calendar

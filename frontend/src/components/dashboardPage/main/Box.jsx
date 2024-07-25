@@ -35,14 +35,13 @@ const SingleBox = ({ task, theme, width, setRefresh }) => {
   let timeRange = dateObj.format("h") + dateObj.format("A");
   const nextHourDate = dateObj.add(1, "hour");
   timeRange += "-" + nextHourDate.format("h") + nextHourDate.format("A");
-  console.log(timeRange);
 
   const handleChange = async (e) => {
     const bodyData = {
       completed: e.target.checked,
     };
     const data = await API.updateTask(`/tasks/${task._id}`, bodyData);
-    console.log(data);
+
     if (data.success) {
       Notify("success", "updated Successfullu");
       setRefresh((prev) => !prev);

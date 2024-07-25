@@ -31,11 +31,16 @@ const DashboardPage = () => {
   const [user, setUser] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   //sync theme for different tabs
   useEffect(() => {
     setWidth(window.innerWidth);
-    window.addEventListener("resize", () => setWidth(window.innerWidth));
+    setHeight(window.innerHeight);
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    });
     window.addEventListener("storage", (e) => setActiveTheme(e.newValue));
     const getUser = async () => {
       const data = await API.getUserProfile();
@@ -45,9 +50,15 @@ const DashboardPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log(endPoint);
+    setIsLoading(true);
+    const persist = localStorage.getItem("tasks" + endPoint);
+
+    if (persist != null) {
+      setTasks(JSON.parse(persist));
+      setIsLoading(false);
+    }
+
     const getData = async () => {
-      setIsLoading(true);
       const data = await API.getTasks(endPoint);
       if (data.success) {
         setIsLoading(false);
@@ -59,7 +70,20 @@ const DashboardPage = () => {
       }
     };
     getData();
-  }, [endPoint, refresh]);
+  }, [endPoint]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await API.getTasks(endPoint);
+      if (data.success) {
+        localStorage.setItem("tasks" + endPoint, JSON.stringify(data.data));
+        setTasks(data.data);
+      } else {
+        setTasks([]);
+      }
+    };
+    getData();
+  }, [refresh]);
 
   useGSAP(() => {
     gsap.from(".dashboard", {
@@ -86,6 +110,7 @@ const DashboardPage = () => {
         width,
         setRefresh,
         isLoading,
+        height,
       }}
     >
       <DashboardWrapper theme={theme} className="dashboard min-h-screen">

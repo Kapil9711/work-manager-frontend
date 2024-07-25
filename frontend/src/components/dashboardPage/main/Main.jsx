@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import gsap, { Expo } from "gsap";
 import dayjs from "dayjs";
 import Loading from "../../../utilities/Loading";
+import { nextDate } from "../../../utilities/nextDate";
 // import Modal from "../../../utilities/Modal";
 
 const MainWrapper = styled.main`
@@ -35,10 +36,10 @@ const daysOfWeek = [
 ];
 
 const Main = () => {
-  const { setEndPoint, theme, date, tasks, isLoading } =
+  const { setEndPoint, theme, date, tasks, isLoading, height } =
     useContext(ThemeContext);
   const [value, setValue] = useState(dayjs(new Date().toDateString()));
-  const day = daysOfWeek[date.split("-")[3]];
+  const day = daysOfWeek[date?.split("-")[3]];
   const nestedTask = converToNestedArr(tasks);
 
   useGSAP(() => {
@@ -51,7 +52,11 @@ const Main = () => {
   });
 
   return (
-    <MainWrapper className="mt-10  md:grid-cols-[1fr,2fr] gap-8">
+    <MainWrapper
+      className={`${
+        height > 750 ? "mt-16" : "mt-10"
+      }  md:grid-cols-[1fr,2fr] gap-8`}
+    >
       <div className="mx-auto sm:mx-0">
         <Calendar value={value} setValue={setValue} setEndPoint={setEndPoint} />
       </div>
@@ -85,13 +90,21 @@ const Main = () => {
             </div>
           ) : (
             <div className="relative z-10 flex flex-col gap-8  ">
-              {nestedTask.map((tasks, i) => (
-                <Box
-                  tasks={tasks}
-                  key={tasks[0].id}
-                  position={i % 2 === 0 ? "self-end" : "self-start"}
-                />
-              ))}
+              {nestedTask.length === 0 ? (
+                <div className="h-40 flex justify-center items-center ">
+                  <h1 className="text-3xl font-bold tracking-wider">
+                    No Task Found
+                  </h1>
+                </div>
+              ) : (
+                nestedTask.map((tasks, i) => (
+                  <Box
+                    tasks={tasks}
+                    key={tasks[0].id}
+                    position={i % 2 === 0 ? "self-end" : "self-start"}
+                  />
+                ))
+              )}
             </div>
           )}
         </div>

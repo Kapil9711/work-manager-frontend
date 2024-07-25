@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../../page/DashboardPage";
 import { nextDate, prevDate } from "../../../utilities/nextDate";
 import dayjs from "dayjs";
@@ -13,17 +13,20 @@ const MainHeader = ({ setValue }) => {
   const Date2 = nextDate(Date1);
   const prev1 = prevDate(today);
   const prev2 = prevDate(prev1);
+
   const date1 = prev2.getDate();
   const date2 = prev1.getDate();
   const date3 = today.getDate();
   const date4 = Date1.getDate();
   const date5 = Date2.getDate();
 
+  useEffect(() => {
+    setActive(today.getDate());
+  }, [date]);
+
   const [active, setActive] = useState(date3);
 
   const dateArr = [prev2, prev1, today, Date1, Date2];
-
-  console.log(date1, date2, date3, date4, date5);
   const arr = [date1, date2, date3, date4, date5];
 
   return (
