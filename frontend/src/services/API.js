@@ -122,7 +122,16 @@ class API {
       return error.response.data;
     }
   }
+
+  // update task => /api/v1/tasks/:id
+  async updateTask(endPoint, body) {
+    try {
+      const { data } = await this.api.put(endPoint, body, this.headers);
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
 }
-console.log(url);
 
 export default new API(url, true, headers);

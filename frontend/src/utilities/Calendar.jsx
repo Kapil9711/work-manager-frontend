@@ -8,9 +8,14 @@ import getFormatedDateString from "./getDateString";
 import { useContext } from "react";
 import { ThemeContext } from "../page/DashboardPage";
 
-export default function Calendar({ setEndPoint }) {
+export default function Calendar({ setEndPoint, value, setValue }) {
   const { theme } = useContext(ThemeContext);
-  const [value, setValue] = React.useState(dayjs(new Date().toDateString()));
+  // const [value, setValue] = React.useState(dayjs(new Date().toDateString()));
+
+  React.useEffect(() => {
+    const dateString = getFormatedDateString(value.$D, value.$M + 1, value.$y);
+    setEndPoint(`/tasks?date=${dateString + "-" + value.$W}`);
+  }, [value]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -40,13 +45,13 @@ export default function Calendar({ setEndPoint }) {
             }`}
             value={value}
             onChange={(newValue) => {
-              const dateString = getFormatedDateString(
-                newValue.$D,
-                newValue.$M + 1,
-                newValue.$y
-              );
+              // const dateString = getFormatedDateString(
+              //   newValue.$D,
+              //   newValue.$M + 1,
+              //   newValue.$y
+              // );
               setValue(newValue);
-              setEndPoint(`/tasks?date=${dateString + "-" + newValue.$W}`);
+              // setEndPoint(`/tasks?date=${dateString + "-" + newValue.$W}`);
             }}
           />
         </DemoItem>

@@ -20,9 +20,9 @@ const AddTask = () => {
 
     e.preventDefault();
     const title = titleRef.current.value;
-    if (title.length < 8) {
+    if (title.length < 6) {
       setLoading(false);
-      return Notify("error", "Title should have 8 character");
+      return Notify("error", "Title should have 6 character");
     }
     const bodyData = {
       title,

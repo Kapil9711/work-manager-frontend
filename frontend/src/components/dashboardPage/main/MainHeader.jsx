@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../../page/DashboardPage";
 import { nextDate, prevDate } from "../../../utilities/nextDate";
+import dayjs from "dayjs";
 
-const MainHeader = () => {
-  const [active, setActive] = useState(2);
+const MainHeader = ({ setValue }) => {
   const { date } = useContext(ThemeContext);
   const day = Number(date?.split("-")[0]);
   const month = date?.split("-")[1];
@@ -19,30 +19,39 @@ const MainHeader = () => {
   const date4 = Date1.getDate();
   const date5 = Date2.getDate();
 
+  const [active, setActive] = useState(date3);
+
+  const dateArr = [prev2, prev1, today, Date1, Date2];
+
   console.log(date1, date2, date3, date4, date5);
   const arr = [date1, date2, date3, date4, date5];
 
   return (
-    <div className="h-16 sticky  z-20 top-0 mb-5 flex sm:px-24 justify-around items-center  sm:gap-10 bg-[#f38e81]  w-full ">
+    <div className="h-16 sticky  z-20 top-0 mb-5 flex sm:px-24 justify-around items-center  sm:gap-10 bg-[#f38e81]  w-full transition-all duration-1000 ease-out">
       {arr.map((date, i) => (
         <p
-          onClick={() => setActive(i)}
+          onClick={() => {
+            setActive(date);
+            setValue(dayjs(dateArr[i]));
+          }}
           key={date}
           className={`h-12  cursor-pointer ${
-            active != i && "hover:bg-red-500"
+            active != date && "hover:bg-red-200"
           }  ${
-            active === i && "bg-red-500"
-          }  relative w-12 flex items-center justify-center rounded-full    `}
+            active === date && "bg-red-500 scale-110"
+          }  relative w-12 flex items-center justify-center rounded-full`}
         >
           <span
-            style={{ fontSize: active === i ? "26px" : "18px" }}
-            className={`text-white  ${active === i && "font-bold"} `}
+            style={{ fontSize: active === date ? "28px" : "18px" }}
+            className={`text-white  ${
+              active === date && "font-bold"
+            } select-none `}
           >
             {date}
           </span>
           <span
             className={`${
-              active === i && "border-t-[56px] border-transparent"
+              active === date && "border-t-[56px] border-transparent"
             }  absolute -top-10 -z-10 h-28 w-28    rounded-t-full `}
           ></span>
         </p>

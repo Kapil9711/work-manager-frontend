@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Calendar from "../../../utilities/Calendar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../../../page/DashboardPage";
 import getDateAndDay from "../../../utilities/getDateandDay";
 import Box from "./Box";
@@ -8,7 +8,8 @@ import MainHeader from "./MainHeader";
 import converToNestedArr from "../../../utilities/convertTaskintoNestedArr";
 import { useGSAP } from "@gsap/react";
 import gsap, { Expo } from "gsap";
-import Modal from "../../../utilities/Modal";
+import dayjs from "dayjs";
+// import Modal from "../../../utilities/Modal";
 
 const MainWrapper = styled.main`
   width: min(100%, 1200px);
@@ -24,7 +25,10 @@ const TastShow = styled.div`
 
 const Main = () => {
   const { setEndPoint, theme, date, tasks } = useContext(ThemeContext);
+  const [value, setValue] = useState(dayjs(new Date().toDateString()));
+
   const nestedTask = converToNestedArr(tasks);
+  console.log(tasks);
 
   useGSAP(() => {
     gsap.from(".box", {
@@ -38,16 +42,21 @@ const Main = () => {
   return (
     <MainWrapper className="mt-10  md:grid-cols-[1fr,2fr] gap-8">
       <div className="mx-auto sm:mx-0">
-        <Calendar setEndPoint={setEndPoint} />
+        <Calendar value={value} setValue={setValue} setEndPoint={setEndPoint} />
       </div>
       <TastShow
         theme={theme}
         className="h-screen sm:h-[500px] rounded-[28px] overflow-hidden"
       >
-        <section className="mt-2 px-5 ">
-          <h1 className="text-white font-bold tracking-wide text-lg underline">
+        <section className="mt-2 px-5 flex justify-between items-center">
+          <h1 className="text-white font-bold tracking-wide text-2xl ">
             {getDateAndDay(date)}
           </h1>
+
+          <p className="tracking-wide text-xl  font-bold text-white">
+            Tasks-{tasks.length}
+          </p>
+          <p> dffdfsffdfdsakfds</p>
         </section>
         <div
           style={{ scrollbarWidth: "none" }}
@@ -55,7 +64,7 @@ const Main = () => {
             theme.light ? "bg-[#f6d6d3]" : "bg-[#f8c4c4]"
           } `}
         >
-          <MainHeader />
+          <MainHeader setValue={setValue} />
           <div className="relative z-10 flex flex-col gap-8  ">
             {nestedTask.map((tasks, i) => (
               <Box
