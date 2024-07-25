@@ -69,7 +69,7 @@ const Navbar = () => {
           style={{
             color: theme.light ? theme["primary-600"] : theme["primary-500"],
           }}
-          className="btn btn-ghost text-2xl -ml-6 sm:ml:0   md:text-4xl font-bold italic tracking-wider"
+          className="btn btn-ghost text-2xl -ml-6 sm:ml:0   md:text-4xl font-bold italic tracking-wide"
         >
           Listify
         </a>
