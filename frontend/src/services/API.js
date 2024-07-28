@@ -102,6 +102,18 @@ class API {
     }
   }
 
+  //upload image => /api/v1/image/id
+  async uploadImage(endPoint, body) {
+    try {
+      const { data } = await this.api.post(endPoint, body, {
+        "Content-Type": "multipart/form-data",
+      });
+      return data;
+    } catch (error) {
+      return error.response.data;
+    }
+  }
+
   // *************************************task api*****************
 
   //get all tasks => /api/v1/tasks

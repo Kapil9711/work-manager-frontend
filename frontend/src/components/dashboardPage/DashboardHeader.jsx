@@ -3,10 +3,9 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../page/DashboardPage";
 import Modal from "../../utilities/Modal";
 import AddTask from "./AddTask";
-import { heIL } from "@mui/x-date-pickers/locales";
 
 const DashHeader = styled.nav`
-  width: min(100%, 1200px);
+  width: min(100%, 1500px);
   margin-inline: auto;
 `;
 
@@ -20,11 +19,15 @@ const DashboardHeader = () => {
       } `}
     >
       <div>
-        <h1 className="text-xl text-white sm:text-3xl font-bold tracking-wide">
+        <h1
+          className={`text-xl text-white  ${
+            width > 1500 ? "sm:text-4xl" : "sm:text-3xl"
+          }  font-bold tracking-wide`}
+        >
           My Calendar
         </h1>
 
-        <p className="hidden sm:block text-gray-100">
+        <p className="hidden sm:block text-gray-100 xl:mt-2">
           information designed to accurate insights
         </p>
       </div>
@@ -35,7 +38,9 @@ const DashboardHeader = () => {
           if (width < 1100) return;
           setIsOpen(true);
         }}
-        className={`text-xl  text-white py-3 px-6 rounded-full   ${
+        className={`text-xl  text-white py-3 px-6 ${
+          width > 1500 && "xl:py-6 xl:px-12"
+        } rounded-full   ${
           theme.light
             ? "bg-orange-800 hover:bg-orange-600"
             : "bg-[#f46645] hover:bg-orange-500"
@@ -43,7 +48,9 @@ const DashboardHeader = () => {
       >
         + Add Task
       </button>
-      {isOpen && <Modal setIsOpen={setIsOpen}>{<AddTask />}</Modal>}
+      {isOpen && (
+        <Modal setIsOpen={setIsOpen}>{<AddTask setIsOpen={setIsOpen} />}</Modal>
+      )}
     </DashHeader>
   );
 };

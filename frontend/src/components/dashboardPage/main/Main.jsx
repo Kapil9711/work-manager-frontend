@@ -11,10 +11,12 @@ import gsap, { Expo } from "gsap";
 import dayjs from "dayjs";
 import Loading from "../../../utilities/Loading";
 import { nextDate } from "../../../utilities/nextDate";
+import CustomTable from "../../../utilities/Table";
+import { useSelector } from "react-redux";
 // import Modal from "../../../utilities/Modal";
 
 const MainWrapper = styled.main`
-  width: min(100%, 1200px);
+  width: min(100%, 1500px);
   margin-inline: auto;
   display: grid;
 `;
@@ -34,14 +36,28 @@ const daysOfWeek = [
   "Friday",
   "Saturday",
 ];
+const monthsOfYear = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const Main = () => {
-  const { setEndPoint, theme, date, tasks, isLoading, height } =
-    useContext(ThemeContext);
-  const [value, setValue] = useState(dayjs(new Date().toDateString()));
+  const { theme, date, height, width } = useContext(ThemeContext);
+  const tasks = useSelector((state) => state.task.value);
+  const [value, setValue] = useState(dayjs(new Date()));
   const day = daysOfWeek[date?.split("-")[3]];
-  const nestedTask = converToNestedArr(tasks);
-
+  const day1 = date?.split("-")[0];
+  const day2 = monthsOfYear[Number(date?.split("-")[1]) - 1];
   useGSAP(() => {
     gsap.from(".box", {
       duration: 2,
@@ -55,14 +71,16 @@ const Main = () => {
     <MainWrapper
       className={`${
         height > 750 ? "mt-16" : "mt-10"
-      }  md:grid-cols-[1fr,2fr] gap-8`}
+      }  lg:grid-cols-[1fr,2fr] gap-8 xl:gap-0`}
     >
-      <div className="mx-auto sm:mx-0">
-        <Calendar value={value} setValue={setValue} setEndPoint={setEndPoint} />
+      <div className="mx-auto lg:mx-0">
+        <Calendar value={value} setValue={setValue} />
       </div>
       <TastShow
         theme={theme}
-        className="h-screen sm:h-[500px] rounded-[28px] overflow-hidden"
+        className={`h-screen sm:h-[500px] ${
+          height > 800 && "xl:h-[600px]"
+        }  rounded-[28px] overflow-hidden`}
       >
         <section className="mt-2 px-5 flex justify-between items-center">
           <h1 className="text-white font-bold sm:tracking-wide text-lg sm:text-2xl ">
@@ -79,11 +97,17 @@ const Main = () => {
         </section>
         <div
           style={{ scrollbarWidth: "none" }}
-          className={`box  pb-20 mt-4  overflow-scroll  h-full rounded-[28px] ${
-            theme.light ? "bg-[#f6d6d3]" : "bg-[#f8c4c4]"
-          } `}
+          className={`box   mt-4  h-full   rounded-[28px] bg-[#f3a69b] `}
         >
-          <MainHeader setValue={setValue} />
+          <CustomTable
+            tasks={tasks}
+            setValue={setValue}
+            day1={day1}
+            day={day2}
+            width={width}
+            theme={theme}
+          />
+          {/* <MainHeader setValue={setValue} />
           {isLoading ? (
             <div className="h-40 flex justify-center items-center">
               <Loading />
@@ -106,7 +130,7 @@ const Main = () => {
                 ))
               )}
             </div>
-          )}
+          )} */}
         </div>
       </TastShow>
     </MainWrapper>

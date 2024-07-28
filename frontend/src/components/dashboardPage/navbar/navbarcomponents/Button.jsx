@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import { ThemeContext } from "../page/DashboardPage";
+import { ThemeContext } from "../../../../page/DashboardPage";
 
 const ButtonWrapper = styled.button`
-  background-color: ${({ theme }) => {
+  background-color: ${({ theme, active, compare }) => {
+    if (active === compare) return theme["primary-600"];
     return theme["primary-300"];
   }};
-  color: ${({ theme }) => theme.gray};
+  color: ${({ theme, active, compare }) => {
+    if (active === compare) return theme.white;
+    return theme.gray;
+  }};
   &:hover,
   &:focus,
   &:active {
@@ -15,10 +19,14 @@ const ButtonWrapper = styled.button`
   }
 `;
 
-const Button = ({ children }) => {
+const Button = ({ children, active, setActive }) => {
   const { theme } = useContext(ThemeContext);
+
   return (
     <ButtonWrapper
+      onClick={() => setActive(children)}
+      compare={children}
+      active={active}
       theme={theme}
       className={`rounded-full py-[10px] px-[24px] font-bold tracking-wide text-center`}
     >

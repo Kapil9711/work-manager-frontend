@@ -1,21 +1,36 @@
 import * as React from "react";
-import dayjs from "dayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import getFormatedDateString from "./getDateString";
 import { useContext } from "react";
 import { ThemeContext } from "../page/DashboardPage";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTask, setTasks } from "../redux/task/taskSlice";
 
-export default function Calendar({ setEndPoint, value, setValue }) {
+export default function Calendar({ value, setValue }) {
+  const userId = useSelector(({ user }) => user.id);
+  const isMonth = useSelector(({ task }) => task.isGetByMonth);
+  const key = useSelector(({ task }) => task.key);
   const { theme } = useContext(ThemeContext);
-  // const [value, setValue] = React.useState(dayjs(new Date().toDateString()));
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const dateString = getFormatedDateString(value.$D, value.$M + 1, value.$y);
-    setEndPoint(`/tasks?date=${dateString + "-" + value.$W}`);
-  }, [value]);
+    const endPoint = `/tasks?date=${value.format("YYYY-MM-DD")}${
+      isMonth ? "&&filter=month" : ""
+    }`;
+    dispatch(fetchTask({ endPoint, userId }));
+  }, [key]);
+
+  React.useEffect(() => {
+    const endPoint = `/tasks?date=${value.format("YYYY-MM-DD")}${
+      isMonth ? "&&filter=month" : ""
+    }`;
+    const persist = JSON.parse(localStorage.getItem(userId + endPoint));
+    console.log("persist", persist);
+    if (persist) dispatch(setTasks(persist));
+    else dispatch(fetchTask({ endPoint, userId }));
+  }, [value, isMonth]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -31,10 +46,10 @@ export default function Calendar({ setEndPoint, value, setValue }) {
                   backgroundColor: theme.green,
                   color: "black",
                   fontWeight: "bold", // Your custom background color
-                  // "&:hover": {
-                  //   backgroundColor: theme.green,
-                  //   color: "black", // Custom hover color
-                  // },
+                  "&:hover": {
+                    backgroundColor: theme.green,
+                    color: "black", // Custom hover color
+                  },
                 },
               },
             }}

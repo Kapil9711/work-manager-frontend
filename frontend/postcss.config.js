@@ -3,4 +3,7 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
+  daisyui: {
+    themes: [], // Disable all DaisyUI themes
+  },
 };

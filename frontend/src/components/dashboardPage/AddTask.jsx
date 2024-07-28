@@ -5,10 +5,11 @@ import dayjs from "dayjs";
 import Loading from "../../utilities/Loading";
 import Notify from "../../utilities/Toasts";
 import API from "../../services/API";
-import { useContext } from "react";
-import { ThemeContext } from "../../page/DashboardPage";
-const AddTask = () => {
-  const { setRefresh } = useContext(ThemeContext);
+import { useDispatch } from "react-redux";
+import { setTaskRefresh } from "../../redux/task/taskSlice";
+
+const AddTask = ({ setIsOpen }) => {
+  const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
   const [date, setDate] = useState(dayjs(new Date().toISOString()));
   const [priority, setPriority] = useState("Low");
@@ -17,7 +18,6 @@ const AddTask = () => {
 
   const createTask = async (e) => {
     setLoading(true);
-
     e.preventDefault();
     const title = titleRef.current.value;
     if (title.length < 6) {
@@ -35,7 +35,8 @@ const AddTask = () => {
     if (data.success) {
       setLoading(false);
       Notify("success", "created successfully");
-      setRefresh((prev) => !prev);
+      dispatch(setTaskRefresh());
+      setIsOpen(false);
     } else {
       setLoading(false);
       Notify("error", data.message);

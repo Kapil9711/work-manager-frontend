@@ -1,13 +1,14 @@
-import Button from "../../utilities/Button";
-import starImg from "../../images/user.png";
+import Button from "./navbarcomponents/Button";
 import styled from "styled-components";
-import { useContext } from "react";
-import { ThemeContext } from "../../page/DashboardPage";
-import DropDown from "../../utilities/DropDown";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../../page/DashboardPage";
+import DropDown from "./navbarcomponents/DropDown";
+import { useDispatch } from "react-redux";
+import { setIsGetByMonth } from "../../../redux/task/taskSlice";
 
 //styles for nav
 const Nav = styled.nav`
-  width: min(100%, 1200px);
+  width: min(100%, 1600px);
   margin-inline: auto;
 `;
 // styles for themebutton
@@ -29,7 +30,10 @@ const ThemeBtn = styled.button`
 `;
 
 const Navbar = () => {
-  const { setActiveTheme, theme, user, setUser } = useContext(ThemeContext);
+  const { setActiveTheme, theme } = useContext(ThemeContext);
+  const dispatch = useDispatch();
+  const [active, setActive] = useState("Daily");
+
   return (
     <Nav className="navbar  bg-transparent">
       <div className="navbar-start">
@@ -57,9 +61,7 @@ const Navbar = () => {
             <li>
               <Button className="btn btn-ghost text-xl">Daily</Button>
             </li>
-            <li>
-              <Button className="btn btn-ghost text-xl">Week</Button>
-            </li>
+
             <li>
               <Button className="btn btn-ghost text-xl">Month</Button>
             </li>
@@ -76,14 +78,24 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-5  ">
-          <li>
-            <Button className="btn btn-ghost text-xl">Daily</Button>
+          <li onClick={() => dispatch(setIsGetByMonth(false))}>
+            <Button
+              active={active}
+              setActive={setActive}
+              className="btn btn-ghost text-xl"
+            >
+              Daily
+            </Button>
           </li>
-          <li>
-            <Button className="btn btn-ghost text-xl">Weekly</Button>
-          </li>
-          <li>
-            <Button className="btn btn-ghost text-xl">Monthly</Button>
+
+          <li onClick={() => dispatch(setIsGetByMonth(true))}>
+            <Button
+              active={active}
+              setActive={setActive}
+              className="btn btn-ghost text-xl"
+            >
+              Monthly
+            </Button>
           </li>
         </ul>
       </div>
@@ -92,13 +104,7 @@ const Navbar = () => {
           {theme.light ? "dark" : "light"}
         </ThemeBtn>
         <a className="flex  items-center">
-          {/* <img className="rounded-full w-11 h-11" src={starImg} alt="starImg" /> */}
-
-          <DropDown starImg={starImg} user={user} setUser={setUser} />
-
-          {/* <p className="hidden sm:block text-white text-xl font-bold tracking-wide">
-            {user.username}
-          </p> */}
+          <DropDown />
         </a>
       </div>
     </Nav>
