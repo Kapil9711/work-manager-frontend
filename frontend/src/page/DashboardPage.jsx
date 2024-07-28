@@ -2,11 +2,13 @@ import gsap, { Expo } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styled from "styled-components";
 import useTheme from "../utilities/Theme";
-import { createContext, useEffect, useState } from "react";
-const ThemeContext = createContext();
-import Navbar from "../components/dashboardPage/navbar/Navbar";
-import DashboardHeader from "../components/dashboardPage/DashboardHeader";
-import Main from "../components/dashboardPage/main/Main";
+import { createContext, useEffect, useState, lazy } from "react";
+export const ThemeContext = createContext();
+const Navbar = lazy(() => import("../components/dashboardPage/navbar/Navbar"));
+const DashboardHeader = lazy(() =>
+  import("../components/dashboardPage/DashboardHeader")
+);
+const Main = lazy(() => import("../components/dashboardPage/main/Main"));
 
 // styled component styles
 const DashboardWrapper = styled.div`
@@ -69,4 +71,4 @@ const DashboardPage = () => {
   );
 };
 
-export { ThemeContext, DashboardPage };
+export default DashboardPage;

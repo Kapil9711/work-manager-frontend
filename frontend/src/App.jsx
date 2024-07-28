@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import API from "./services/API";
-
-import AuthPage from "./page/AuthPage";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import LandingPage from "./page/LandingPage";
+const AuthPage = React.lazy(() => import("./page/AuthPage"));
+const LandingPage = React.lazy(() => import("./page/LandingPage"));
 import { ToastContainer } from "react-toastify";
-import { DashboardPage } from "./page/DashboardPage";
+// import { DashboardPage } from "./page/DashboardPage";
+const DashboardPage = React.lazy(() => import("./page/DashboardPage.jsx"));
 import { useNavigate } from "react-router-dom";
 
 function App() {
